@@ -121,3 +121,43 @@ func (A *matrix) scale(a float64) {
 		}
 	}
 }
+
+func addMatrix(A *matrix, B *matrix) *matrix {
+	result := makeMatrix(make([]float64, A.cols*A.rows), A.cols, A.rows)
+
+	for i := 0; i < A.rows; i++ {
+		for j := 0; j < A.cols; j++ {
+			result.setElm(i, j, A.getElm(i, j)+B.getElm(i, j))
+		}
+	}
+
+	return result
+}
+
+func substractMatrix(A *matrix, B *matrix) *matrix {
+	result := makeMatrix(make([]float64, A.cols*A.rows), A.cols, A.rows)
+
+	for i := 0; i < A.rows; i++ {
+		for j := 0; j < A.cols; j++ {
+			result.setElm(i, j, A.getElm(i, j)-B.getElm(i, j))
+		}
+	}
+
+	return result
+}
+
+func multiplyMatrix(A *matrix, B *matrix) *matrix {
+	result := makeMatrix(make([]float64, A.cols*A.rows), A.cols, A.rows)
+
+	for i := 0; i < A.rows; i++ {
+		for j := 0; j < A.cols; j++ {
+			sum := float64(0)
+			for k := 0; k < A.cols; k++ {
+				sum += A.getElm(i, k) * B.getElm(k, j)
+			}
+			result.setElm(i, j, sum)
+		}
+	}
+
+	return result
+}
